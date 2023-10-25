@@ -4,9 +4,22 @@ window.addEventListener("load", function() {
 })
 
 function calculate(countTo, countBy) {
-  if (countBy > countTo) {
+  if ((countTo > 0 && countBy < 0) || (countTo < 0 && countBy > 0)) {
     return "error";
-  } else {
+  }
+  else if ((countBy > countTo) && (countTo && countBy < 0)) {
+     {
+      let result = 0;
+      let results = [];
+      for (let index = 0; index >= countTo - countBy; index += countBy) {
+        result += countBy;
+        results.push(result);
+      }
+      console.log(results);
+      const resultsString = results.toString();
+      return resultsString;
+    }
+  } else if ((countBy < countTo) && (countTo && countBy > 0)){
   let result = 0;
   let results = [];
   for (let index = 0; index <= countTo - countBy; index += countBy) {
@@ -16,8 +29,11 @@ function calculate(countTo, countBy) {
   console.log(results);
   const resultsString = results.toString();
   return resultsString;
+  } else {
+    return "error";
   }
 }
+
 
 
 function ui(e) {
