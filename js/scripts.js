@@ -1,11 +1,9 @@
 window.addEventListener("load", function() {
-  document.getElementById("form").addEventListener("submit", calculate);
+  document.getElementById("form").addEventListener("submit", ui);
+  
 })
 
-function calculate(e) {
-  e.preventDefault();
-  const countBy = parseInt(document.getElementById("countBy").value);
-  const countTo = parseInt(document.getElementById("countTo").value);
+function calculate(countTo, countBy) {
   if (countBy > countTo) {
     return "error";
   } else {
@@ -16,6 +14,24 @@ function calculate(e) {
     results.push(result);
   }
   console.log(results);
-  return results;
+  const resultsString = results.toString();
+  return resultsString;
   }
+}
+
+
+function ui(e) {
+  e.preventDefault();
+  const countBy = parseInt(document.getElementById("countBy").value);
+  const countTo = parseInt(document.getElementById("countTo").value);
+  let finalResult = calculate(countTo, countBy);
+  let h2 = document.getElementById("results")
+  if (finalResult === "error") {
+    h2.className = "error";
+    h2.innerText = "ERROR: INVALID INPUTS";
+  } else {
+    h2.className = "normal";
+    h2.innerText = finalResult;
+  }
+
 }
